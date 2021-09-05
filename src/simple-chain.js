@@ -14,15 +14,15 @@ export default {
     return this;
   },
   removeLink (position) {
-    if(typeof(position) !== 'number') {
+    if (typeof(position) !== 'number') {
       this.chain = [];
-      throw new Error();
+      throw new Error(`You can't remove incorrect link!`);
     }
 
     position--;
-    if(position < 0 || position >= this.getLength()) {
+    if (position < 0 || position >= this.getLength()) {
       this.chain = [];
-      throw new Error();
+      throw new Error(`You can't remove incorrect link!`);
     }
 
     this.chain.splice(position, 1);
