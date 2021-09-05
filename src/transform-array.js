@@ -14,8 +14,12 @@ import { NotImplementedError } from '../extensions/index.js';
  * 
  */
 export default function transform(arr) {
+  if (!(arr instanceof Array)) {
+    throw new Error(`'arr' parameter must be an instance of the Array!`);
+  }
   let newArr = [];
-  if(Array.isArray(arr)){
+
+  if (Array.isArray(arr)) {
       for(let i = 0; i < arr.length; i++) {
           if(arr[i] === '--discard-next'){
               i++;
@@ -33,8 +37,7 @@ export default function transform(arr) {
               newArr.push(arr[i]);
           }
       };
-  } else {
-      throw new Error();
   }
+
   return newArr.filter(e => e !== undefined);
 }
