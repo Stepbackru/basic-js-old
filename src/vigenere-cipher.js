@@ -20,7 +20,7 @@ import { NotImplementedError } from '../extensions/index.js';
  * 
  */
 export default class VigenereCipheringMachine {
-  constructor(dir=true) {
+  constructor(dir = true) {
       this.dir = dir;
   }
 
@@ -34,40 +34,48 @@ export default class VigenereCipheringMachine {
   }
 
   encrypt(str, key) {
-      return this.crypt(str, key, false);
+    if (str == undefined || key == undefined) {
+        throw new Error(`Incorrect arguments!`);
+    }
+
+    return this.crypt(str, key, false);
   }
 
   decrypt(str, key) {
-      return this.crypt(str, key, true);
+    if (str == undefined || key == undefined) {
+        throw new Error(`Incorrect arguments!`);
+    }
+    
+    return this.crypt(str, key, true);
   }
 
   crypt(str, key, isDec) {
-      if(str === undefined || key == undefined) {
-          throw new Error();
-      }
+    if (str == undefined || key == undefined) {
+        throw new Error(`Incorrect arguments!`);
+    }
 
-      str = str.toUpperCase();
-      key = key.toUpperCase();
+    str = str.toUpperCase();
+    key = key.toUpperCase();
 
-      let arr = [];
-      let coded = 0;
-      for(let i = 0; i < str.length; ++i) {
-          if(str[i] >= 'A' && str[i] <= 'Z') {
-              if(isDec) {
-                  arr.push(this.shift(str[i], 26 - this.symCode(key[coded % key.length])));
-              } else {
-                  arr.push(this.shift(str[i], this.symCode(key[coded % key.length])));
-              }
-              coded++;
-          } else {
-              arr.push(str[i]);
-          }
-      }
+    let arr = [];
+    let coded = 0;
+    for(let i = 0; i < str.length; ++i) {
+        if(str[i] >= 'A' && str[i] <= 'Z') {
+            if(isDec) {
+                arr.push(this.shift(str[i], 26 - this.symCode(key[coded % key.length])));
+            } else {
+                arr.push(this.shift(str[i], this.symCode(key[coded % key.length])));
+            }
+            coded++;
+        } else {
+            arr.push(str[i]);
+        }
+    }
 
-      if(!this.dir) {
-          arr.reverse();
-      }
+    if(!this.dir) {
+        arr.reverse();
+    }
 
-      return arr.join('');
+    return arr.join('');
   }
 }
