@@ -15,10 +15,10 @@ import { NotImplementedError } from '../extensions/index.js';
  *
  */
 export default function countCats(matrix) {
-  let cats = backyard.reduce((acc, subArray) => acc.concat(subArray), []);
+  let cats = matrix.reduce((acc, subArray) => acc.concat(subArray), []);
   let count = 0;
   cats.forEach(e => {
-    if(e == '^^'){
+    if (e == '^^') {
       count += 1;
     }
   });
