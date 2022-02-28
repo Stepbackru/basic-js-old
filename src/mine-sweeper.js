@@ -1,4 +1,4 @@
-import { NotImplementedError } from '../extensions/index.js';
+const { NotImplementedError } = require('../extensions/index.js');
 
 /**
  * In the popular Minesweeper game you have a board with some mines and those cells
@@ -64,3 +64,7 @@ export default function minesweeper (matrix) {
   }
   return minesPlace;
 }
+
+module.exports = {
+  minesweeper
+};
